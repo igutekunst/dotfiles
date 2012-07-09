@@ -1,0 +1,3 @@
+syntax on
+filetype on
+au BufNewFile,BufRead *.scad set filetype=c
