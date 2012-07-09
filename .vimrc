@@ -128,8 +128,8 @@ try
 catch
 endtry
 "Tab Related stuff
-set ts=2
-set shiftwidth=2
+set ts=4
+set shiftwidth=4
 "set expandtab " this should be moved into the python specific file
 set smarttab
 
