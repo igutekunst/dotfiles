@@ -1,14 +1,3 @@
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2002 Sep 19
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"		  for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"		for OpenVMS:  sys$login:.vimrc
-
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
   finish
@@ -17,8 +6,7 @@ endif
 
 
 
-" Use Vim settings, rather then Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
+" Use Vim settings
 set nocompatible
 
 " allow backspacing over everything in insert mode
@@ -142,7 +130,7 @@ endtry
 "Tab Related stuff
 set ts=2
 set shiftwidth=2
-set expandtab
+"set expandtab " this should be moved into the python specific file
 set smarttab
 
 set lbr
@@ -158,21 +146,6 @@ vnoremap <silent> * :call VisualSearch('f')<CR>
 vnoremap <silent> # :call VisualSearch('f')<CR>
 
 
-"Some Paren,bracket magic
-vnoremap $1 <esc>`>a)<esc>`<i(<esc>
-vnoremap $2 <esc>`>a]<esc>`<i[<esc>
-vnoremap $3 <esc>`>a}<esc>`<i{<esc>
-vnoremap $$ <esc>`>a"<esc>`<i"<esc>
-vnoremap $q <esc>`>a'<esc>`<i'<esc>
-vnoremap $e <esc>`>a"<esc>`<i"<esc>
-
-inoremap $1 ()<esc>i
-inoremap $2 []<esc>i
-inoremap $3 {}<esc>i
-inoremap $4 {<esc>o}<esc>O
-inoremap $q ''<esc>i
-inoremap $e ""<esc>i
-inoremap $t <><esc>i
 
 "Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
 nmap <M-j> mz:m+<cr>`z
@@ -190,4 +163,4 @@ let MRU_Max_Entries = 400
 map <leader>f :MRU<CR>
 "autocmd FileType python compiler pylint
 
-au! BufRead,BufNewFile *.scad    set filetype=openscad 
+au! BufRead,BufNewFile *.scad    set filetype=openscad " Should be split out into seperate file later
