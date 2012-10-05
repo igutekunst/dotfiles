@@ -100,7 +100,6 @@ colorscheme sunburst
 " A bunch of things added 
 " from http://amix.dk/vim/vimrc.html
 " Easy vimrc editing
-map <leader>e :e! ~/.vimrc<cr>
 "completes longest possible part,then lets you type more
 set  wildmode=longest:full
 set wildmenu "Turn on WiLd menu
@@ -154,8 +153,11 @@ vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 map <leader>ss :setlocal spell!<cr>
-map <leader>r :!sudo /etc/init.d/django restart<cr>
-
+map <leader>r : source ~/.vimrc<cr>
+map <leader>e :vsp! ~/.vimrc<cr>
+map <leader>h : IAjvi{dddkA€kb;
+map <F4> :echo 'Current time is ' . strftime('%c')<CR>
+map <F3> :TlistToggle<cr>
 
 " Yank ring
 " MRU Plugin Stuff

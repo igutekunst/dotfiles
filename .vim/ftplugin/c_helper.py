@@ -23,3 +23,8 @@ elif "design_principles" in cwd:
   print os.system("make simulate")
   print os.system("./client")
   #subprocess.call("make program", shell=True)
+else:
+    if os.system("gcc %s -o %s" % (sys.argv[1], sys.argv[1] + ".out")) == 0:
+        os.system("./%s" % sys.argv[1]+".out")
+    else:
+        print "Compilation Failed"
