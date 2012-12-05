@@ -151,11 +151,14 @@ nmap <M-j> mz:m+<cr>`z
 nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+map <leader>v :vsp 
+
+
 
 map <leader>ss :setlocal spell!<cr>
 map <leader>r : source ~/.vimrc<cr>
 map <leader>e :vsp! ~/.vimrc<cr>
-map <leader>h : IAjvi{dddkA€kb;
+map <leader>E :sp! ~/.vimrc<cr>
 map <F4> :echo 'Current time is ' . strftime('%c')<CR>
 map <F3> :TlistToggle<cr>
 
@@ -166,3 +169,8 @@ map <leader>f :MRU<CR>
 "autocmd FileType python compiler pylint
 
 au! BufRead,BufNewFile *.scad    set filetype=openscad " Should be split out into seperate file later
+
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
