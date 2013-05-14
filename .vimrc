@@ -3,6 +3,8 @@ if v:progname =~? "evim"
   finish
 endif
 
+noremap <C-n> :bnext<CR>
+noremap <C-p> :bprev<CR>
 
 
 
@@ -78,10 +80,6 @@ endif " has("autocmd")
 
 
 set number
-let g:miniBufExplMapWindowNavVim = 1 
-let g:miniBufExplMapWindowNavArrows = 1 
-let g:miniBufExplMapCTabSwitchBufs = 1 
-let g:miniBufExplModSelTarget = 1 
 
 
 let mapleader = ","
@@ -134,33 +132,35 @@ set smarttab
 
 set lbr
 set tw=500
+
 "Auto Indent magic"
 set ai "Auto  indent
 set si "Smart indent
 set wrap "Wrap lines... this could be sketch
 
 
-"Visual  Mode Related tweeks
+"Visual  Mode Related tweaks
 vnoremap <silent> * :call VisualSearch('f')<CR>
 vnoremap <silent> # :call VisualSearch('f')<CR>
 
 
 
-"Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
-map <leader>v :vsp 
+map <leader>v :vsp <CR>
+map <leader>h :sp <CR>
 
-
+" Spelling
 
 map <leader>ss :setlocal spell!<cr>
 map <leader>r : source ~/.vimrc<cr>
 map <leader>e :vsp! ~/.vimrc<cr>
+map <leader>; <C-w>> <cr>
 map <leader>E :sp! ~/.vimrc<cr>
-map <F4> :echo 'Current time is ' . strftime('%c')<CR>
+map <leader>c :!ctags -R .<cr>
+
+map <leader>h :%s/
+
 map <F3> :TlistToggle<cr>
+map :Q<cr> :q<cr>
 
 " Yank ring
 " MRU Plugin Stuff
@@ -174,3 +174,59 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
+
+
+
+" 2013 May Plugin Stuff
+" After adding Vim Addon Manager
+"
+"
+"
+"
+let g:ctrlp_match_window_bottom = 0
+let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_dotfiles = 0
+let g:ctrlp_switch_buffer = 0
+
+let g:ctrlp_map = '<leader>t'
+" Load all the plugins
+set runtimepath+=~/.vim/vim-addon-manager
+call vam#ActivateAddons(['ctrlp', 'taglist', 'surround', 'closetag', 'Syntastic', 'arpeggio'], {'auto_install' : 0})
+
+
+let g:Powerline_symbols = 'simple'
+
+" Sweet pasting idea. use \ key
+nmap \l :setlocal number!<CR>
+nmap \o :set paste!<CR>
+
+" move around lines like a normal person
+nmap j gj
+nmap k gk
+" Jump between buffers with Ctrl
+cnoremap <C-a>  <Home>
+cnoremap <C-b>  <Left>
+cnoremap <C-f>  <Right>
+cnoremap <C-d>  <Delete>
+cnoremap <M-b>  <S-Left>
+cnoremap <M-f>  <S-Right>
+cnoremap <M-d>  <S-right><Delete>
+cnoremap <Esc>b <S-Left>
+cnoremap <Esc>f <S-Right>
+cnoremap <Esc>d <S-right><Delete>
+cnoremap <C-g>  <C-c>
+
+
+" Deal with all the tab stuff
+nmap \t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+nmap \T :set expandtab tabstop=8 shiftwidth=8 softtabstop=4<CR> nmap \M :set noexpandtab tabstop=8 softtabstop=4 shiftwidth=4<CR>
+nmap \m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+"chords
+call arpeggio#map('i', '', 0, 'fj', '<Esc>')
+call arpeggio#map('i', '', 0, 'f;', '<Backspace>')
+call arpeggio#map('n', '', 0, 'w;', ':w<CR>')
+call arpeggio#map('n', '', 0, 'qw;', ':q<CR>')
+call arpeggio#map('n', '', 0, 'q;', ':q<CR>')
+
