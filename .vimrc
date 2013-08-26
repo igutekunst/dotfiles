@@ -157,10 +157,15 @@ map <leader>; <C-w>> <cr>
 map <leader>E :sp! ~/.vimrc<cr>
 map <leader>c :!ctags -R .<cr>
 
+map <leader>R :redraw!<cr>
+
 map <leader>h :%s/
 
-map <F3> :TlistToggle<cr>
 map :Q<cr> :q<cr>
+
+
+cmap <M-j> : ddp
+cmap <M-k> : kddp
 
 " Yank ring
 " MRU Plugin Stuff
@@ -169,6 +174,7 @@ map <leader>f :MRU<CR>
 "autocmd FileType python compiler pylint
 
 au! BufRead,BufNewFile *.scad    set filetype=openscad " Should be split out into seperate file later
+au BufRead,BufNewFile *.flo setfiletype flo
 
 set tabstop=4
 set softtabstop=4
