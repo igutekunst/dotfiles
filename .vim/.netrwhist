@@ -1,10 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/home/igutek/os/kern'
-let g:netrw_dirhist_2='/var/log/gdm'
-let g:netrw_dirhist_3='/var/log'
-let g:netrw_dirhist_4='/home/igutek/dotfiles'
-let g:netrw_dirhist_5='/home/igutek/os/test'
-let g:netrw_dirhist_6='/home/igutek/os/lib'
-let g:netrw_dirhist_7='/home/igutek/os/kern'
-let g:netrw_dirhist_8='/home/igutek/os'
+let g:netrw_dirhist_cnt =0

@@ -52,6 +52,7 @@ command = "%s %s %s -o %s" % (compiler,
 print ("Compiling %s" % filename)
 print (command)
 if os.system(command) == 0:
+    print ("Running %s.out" % filename)
     os.system("./%s" % filename + ".out")
     os.unlink("./%s" % filename + ".out")
 else:

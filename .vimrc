@@ -152,7 +152,7 @@ map <leader>h :sp <CR>
 
 map <leader>ss :setlocal spell!<cr>
 map <leader>r : source ~/.vimrc<cr>
-map <leader>e :vsp! ~/.vimrc<cr>
+map <leader>e :e! ~/.vimrc<cr>
 map <leader>; <C-w>> <cr>
 map <leader>E :sp! ~/.vimrc<cr>
 map <leader>c :!ctags -R .<cr>
@@ -199,30 +199,26 @@ let g:ctrlp_switch_buffer = 0
 let g:ctrlp_map = '<leader>t'
 " Load all the plugins
 set runtimepath+=~/.vim/vim-addon-manager
-call vam#ActivateAddons(['ctrlp', 'taglist', 'surround', 'closetag', 'Syntastic', 'arpeggio'], {'auto_install' : 0})
+call vam#ActivateAddons(['ctrlp', 'taglist','surround', 'closetag', 'Syntastic','EasyMotion', 'arpeggio','vim-coffee-script','The_NERD_tree'], {'auto_install' : 0})
 
-
+let g:clang_user_options='|| exit 0'
 let g:Powerline_symbols = 'simple'
 
 " Sweet pasting idea. use \ key
 nmap \l :setlocal number!<CR>
 nmap \o :set paste!<CR>
+nmap \O :set paste!<CR>
 
 " move around lines like a normal person
 nmap j gj
 nmap k gk
 " Jump between buffers with Ctrl
-cnoremap <C-a>  <Home>
-cnoremap <C-b>  <Left>
-cnoremap <C-f>  <Right>
-cnoremap <C-d>  <Delete>
-cnoremap <M-b>  <S-Left>
-cnoremap <M-f>  <S-Right>
-cnoremap <M-d>  <S-right><Delete>
-cnoremap <Esc>b <S-Left>
-cnoremap <Esc>f <S-Right>
-cnoremap <Esc>d <S-right><Delete>
-cnoremap <C-g>  <C-c>
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+map <leader>j V<CR>:%s/, /,\r/g<CR>
 
 
 " Deal with all the tab stuff
@@ -235,4 +231,12 @@ call arpeggio#map('i', '', 0, 'f;', '<Backspace>')
 call arpeggio#map('n', '', 0, 'w;', ':w<CR>')
 call arpeggio#map('n', '', 0, 'qw;', ':q<CR>')
 call arpeggio#map('n', '', 0, 'q;', ':q<CR>')
+
+
+map <F3> :NERDTreeToggle<cr>
+
+
+" Close scratch window
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
