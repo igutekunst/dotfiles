@@ -181,6 +181,8 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 
+scriptencoding utf-8
+set encoding=utf-8
 
 
 " 2013 May Plugin Stuff
@@ -199,7 +201,7 @@ let g:ctrlp_switch_buffer = 0
 let g:ctrlp_map = '<leader>t'
 " Load all the plugins
 set runtimepath+=~/.vim/vim-addon-manager
-call vam#ActivateAddons(['ctrlp', 'taglist','surround', 'closetag', 'Syntastic','EasyMotion', 'arpeggio','vim-coffee-script','The_NERD_tree'], {'auto_install' : 0})
+call vam#ActivateAddons(['vim-gitgutter', 'ctrlp','taglist','surround', 'closetag', 'Syntastic','EasyMotion', 'fugitive','arpeggio','vim-coffee-script','The_NERD_tree'], {'auto_install' : 0})
 
 let g:clang_user_options='|| exit 0'
 let g:Powerline_symbols = 'simple'
@@ -223,15 +225,13 @@ map <leader>j V<CR>:%s/, /,\r/g<CR>
 
 " Deal with all the tab stuff
 nmap \t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+
 nmap \T :set expandtab tabstop=8 shiftwidth=8 softtabstop=4<CR> nmap \M :set noexpandtab tabstop=8 softtabstop=4 shiftwidth=4<CR>
+
 nmap \m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 "chords
-call arpeggio#map('i', '', 0, 'fj', '<Esc>')
-call arpeggio#map('i', '', 0, 'f;', '<Backspace>')
-call arpeggio#map('n', '', 0, 'w;', ':w<CR>')
-call arpeggio#map('n', '', 0, 'qw;', ':q<CR>')
-call arpeggio#map('n', '', 0, 'q;', ':q<CR>')
 
+map <leader>a @
 
 map <F3> :NERDTreeToggle<cr>
 
@@ -240,3 +240,53 @@ map <F3> :NERDTreeToggle<cr>
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
+
+" logging helpful commands
+
+" set the log level to register v
+map <leader>v V:s/LOG_[A-Z_]*/\=@v/g<CR>
+
+" set register v
+map <leader>sv viw"vy
+
+" Set the log level in a line to 
+map <leader>vst V:s/LOG_[A-Z_]*/LOG_TRACE/g<CR>
+map <leader>vsi V:s/LOG_[A-Z_]*/LOG_INFO/g<CR>
+map <leader>vsw V:s/LOG_[A-Z_]*/LOG_WARNING/g<CR>
+map <leader>vse V:s/LOG_[A-Z_]*/LOG_ERROR/g<CR>
+map <leader>vsc V:s/LOG_[A-Z_]*/LOG_CRITICAL/g<CR>
+
+map <leader>vc ct"
+"Invisible characters
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
+ 
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
+
+
+" Git gutter features
+
+" Form
+" <leader>g <feature> <motion>
+nmap <leader>ghn :GitGutterNextHunk<CR>
+nmap <leader>ghp :GitGutterPrevHunk<CR>
+
+nmap <leader>ghs :GitGutterStageHunk<CR>
+nmap <leader>ghr :GitGutterRevertHunk<CR>
+
+
+
+
+" NERD tree
+nmap gn :tabn<CR>
+nmap gp :tabp<CR>
+nmap gt :tabnew<CR>
+
+noremap <ScrollWheelUp> <C-Y><C-Y>
+noremap <ScrollWheelDown> <C-E><C-E>
+
+
+map <silent> <leader>d :bp\|bd<CR>
+
+nnoremap <leader>u "uyiw :cscope find c @=u
