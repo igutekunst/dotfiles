@@ -46,7 +46,7 @@ if has("autocmd")
   filetype plugin indent on
   filetype indent on
   filetype plugin on
-    
+
   " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
   au!
@@ -70,7 +70,7 @@ if has("autocmd")
 	autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 	"improve autocomplete menu color
 	highlight Pmenu ctermbg=238 gui=bold
-	  
+
 
 else
 
@@ -95,7 +95,7 @@ endif
 set t_Co=256
 colorscheme sunburst
 
-" A bunch of things added 
+" A bunch of things added
 " from http://amix.dk/vim/vimrc.html
 " Easy vimrc editing
 "completes longest possible part,then lets you type more
@@ -152,7 +152,7 @@ map <leader>h :sp <CR>
 
 map <leader>ss :setlocal spell!<cr>
 map <leader>r : source ~/.vimrc<cr>
-map <leader>e :e! ~/.vimrc<cr>
+map <leader>e :vsp! ~/.vimrc<cr>
 map <leader>; <C-w>> <cr>
 map <leader>E :sp! ~/.vimrc<cr>
 map <leader>c :!ctags -R .<cr>
@@ -201,7 +201,7 @@ let g:ctrlp_switch_buffer = 0
 let g:ctrlp_map = '<leader>t'
 " Load all the plugins
 set runtimepath+=~/.vim/vim-addon-manager
-call vam#ActivateAddons(['vim-gitgutter', 'ctrlp','taglist','surround', 'closetag', 'Syntastic','EasyMotion', 'fugitive','arpeggio','vim-coffee-script','The_NERD_tree'], {'auto_install' : 0})
+call vam#ActivateAddons(['vim-gitgutter', 'snipmate','ctrlp','taglist','surround', 'closetag', 'Syntastic','EasyMotion', 'fugitive','arpeggio','vim-coffee-script','The_NERD_tree'], {'auto_install' : 0})
 
 let g:clang_user_options='|| exit 0'
 let g:Powerline_symbols = 'simple'
@@ -249,7 +249,7 @@ map <leader>v V:s/LOG_[A-Z_]*/\=@v/g<CR>
 " set register v
 map <leader>sv viw"vy
 
-" Set the log level in a line to 
+" Set the log level in a line to
 map <leader>vst V:s/LOG_[A-Z_]*/LOG_TRACE/g<CR>
 map <leader>vsi V:s/LOG_[A-Z_]*/LOG_INFO/g<CR>
 map <leader>vsw V:s/LOG_[A-Z_]*/LOG_WARNING/g<CR>
@@ -260,7 +260,7 @@ map <leader>vc ct"
 "Invisible characters
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
- 
+
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
 
@@ -269,6 +269,8 @@ set listchars=tab:▸\ ,eol:¬
 
 " Form
 " <leader>g <feature> <motion>
+
+let g:gitgutter_diff_args = '--ignore-space-at-eol'
 nmap <leader>ghn :GitGutterNextHunk<CR>
 nmap <leader>ghp :GitGutterPrevHunk<CR>
 
@@ -287,6 +289,62 @@ noremap <ScrollWheelUp> <C-Y><C-Y>
 noremap <ScrollWheelDown> <C-E><C-E>
 
 
+
 map <silent> <leader>d :bp\|bd<CR>
 
 nnoremap <leader>u "uyiw :cscope find c @=u
+
+
+
+map <leader>i V:s/#include[ ]*"\([a-z./]*\)"/#include <\1>/g<CR>
+
+if !has('python')
+echo "Error: Required vim compiled with +python"
+    finish
+endif
+
+python << endpython
+import vim, os, subprocess
+
+def getUnstagedFiles():
+    print "---------------------------------------------"
+    output = subprocess.check_output(['git', 'status'])
+    output = output.splitlines()
+    start = 0
+    end = 0
+    for i,line in enumerate(output):
+        if line.startswith('#   (use "git checkout -- <file>..." to discard changes in working directory)'):
+            start = i+2
+        if start != 0 and i > start:
+            if not line.startswith("#\t"):
+                end = i -3
+    if start:
+        changed = [s[2:].split() for s in output[start:end]]
+        changed = [(c[0][:-1], c[1]) for c in changed]
+        print changed
+        return changed
+    else:
+        return None
+
+endpython
+
+function! LineNotes(name)
+
+python << endpython
+(row, col) = vim.current.window.cursor
+relpath = vim.eval("expand('%')")
+full = os.path.join(os.getcwd(), relpath)
+(directory, filename) = os.path.split(full)
+next_file = getUnstagedFiles() [0]
+if next_file:
+    vim.command(":e %s" % next_file[1])
+
+
+endpython
+endfunction
+map <leader>gun :call LineNotes(expand('%'))<CR>
+
+" Remove annoying white space at end of lines
+map <leader>cw :%s/[ \t]*$//g<CR>
+" Remove ^Ms
+map <leader>cr :%s/\r$// <CR>

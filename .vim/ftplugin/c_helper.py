@@ -19,12 +19,15 @@ if "Makefile" in files:
             if m:
                 name = m.group(1)
     print ("running Make")
-    os.system("make")
-
-    if name:
-        print ("Running %s" % name)
-        os.system("./%s" % name)
-    sys.exit(0)
+    status = os.system("make")
+    if status == 0:
+        if name:
+            print ("Running %s" % name)
+            os.system("./%s" % name)
+            sys.exit(0)
+    else:
+        print "Make failed"
+        sys.exit(-1)
 
 
 prefix, extension = os.path.splitext(filename)
@@ -51,7 +54,9 @@ command = "%s %s %s -o %s" % (compiler,
                               filename  + ".out")
 print ("Compiling %s" % filename)
 print (command)
-if os.system(command) == 0:
+status = os.system(command)
+print (status)
+if status == 0: 
     print ("Running %s.out" % filename)
     os.system("./%s" % filename + ".out")
     os.unlink("./%s" % filename + ".out")
