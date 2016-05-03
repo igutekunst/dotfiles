@@ -170,7 +170,7 @@ cmap <M-k> : kddp
 " Yank ring
 " MRU Plugin Stuff
 let MRU_Max_Entries = 400
-map <leader>f :MRU<CR>
+map <leader>f :YcmCompleter FixIt<cr>:w<cr>
 "autocmd FileType python compiler pylint
 
 au! BufRead,BufNewFile *.scad    set filetype=openscad " Should be split out into seperate file later
@@ -182,7 +182,7 @@ set shiftwidth=4
 set expandtab
 
 scriptencoding utf-8
-set encoding=utf-8
+"set encoding=utf-8
 
 
 " 2013 May Plugin Stuff
@@ -200,8 +200,21 @@ let g:ctrlp_switch_buffer = 0
 
 let g:ctrlp_map = '<leader>t'
 " Load all the plugins
-set runtimepath+=~/.vim/vim-addon-manager
-call vam#ActivateAddons(['vim-gitgutter', 'snipmate','ctrlp','taglist','surround', 'closetag', 'Syntastic','EasyMotion', 'fugitive','arpeggio','vim-coffee-script','The_NERD_tree'], {'auto_install' : 0})
+"set runtimepath+=~/.vim/vim-addon-manager
+"call vam#ActivateAddons(['vim-gitgutter', 'snipmate','ctrlp','surround', 'closetag', 'Syntastic','EasyMotion', 'fugitive','vim-coffee-script','The_NERD_tree'], {'auto_install' : 0})
+"
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'junegunn/vim-easy-align'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'bbchung/Clamp'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'Valloric/YouCompleteMe'
+Plug 'scrooloose/syntastic'
+Plug 'ap/vim-css-color'
+
+call plug#end()
 
 let g:clang_user_options='|| exit 0'
 let g:Powerline_symbols = 'simple'
@@ -221,6 +234,8 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 map <leader>j V<CR>:%s/, /,\r/g<CR>
+
+let g:color_coded_enabled = 1
 
 
 " Deal with all the tab stuff
@@ -298,6 +313,8 @@ nnoremap <leader>u "uyiw :cscope find c @=u
 
 map <leader>i V:s/#include[ ]*"\([a-z./]*\)"/#include <\1>/g<CR>
 
+map <leader>c  ggO<ESC>gg:read ~/copy_header<CR>ggdd
+
 if !has('python')
 echo "Error: Required vim compiled with +python"
     finish
@@ -348,3 +365,22 @@ map <leader>gun :call LineNotes(expand('%'))<CR>
 map <leader>cw :%s/[ \t]*$//g<CR>
 " Remove ^Ms
 map <leader>cr :%s/\r$// <CR>
+
+
+map <leader>g :YcmCompleter GoTo<CR>
+
+if has('nvim')
+    :tnoremap <A-h> <C-\><C-n><C-w>h
+    :tnoremap <A-j> <C-\><C-n><C-w>j
+    :tnoremap <A-k> <C-\><C-n><C-w>k
+    :tnoremap <A-l> <C-\><C-n><C-w>l
+    :nnoremap <A-h> <C-w>h
+    :nnoremap <A-j> <C-w>j
+    :nnoremap <A-k> <C-w>k
+    :nnoremap <A-l> <C-w>l
+endif
+
+map =j :%!python -m json.tool<CR>
+
+"Gradle
+au BufNewFile,BufRead *.gradle setf groovy
