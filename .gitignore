@@ -1,5 +1,2 @@
 !.vimrc
-!./.vim/vim-addon-manager
-*
-
-
+.vim/plugged

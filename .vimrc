@@ -7,7 +7,6 @@ noremap <C-n> :bnext<CR>
 noremap <C-p> :bprev<CR>
 
 
-
 " Use Vim settings
 set nocompatible
 
@@ -176,13 +175,14 @@ map <leader>f :YcmCompleter FixIt<cr>:w<cr>
 au! BufRead,BufNewFile *.scad    set filetype=openscad " Should be split out into seperate file later
 au BufRead,BufNewFile *.flo setfiletype flo
 
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+
 set expandtab
 
 scriptencoding utf-8
-"set encoding=utf-8
+set encoding=utf-8
 
 
 " 2013 May Plugin Stuff
@@ -206,6 +206,7 @@ let g:ctrlp_map = '<leader>t'
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'tpope/vim-fugitive'
 Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'bbchung/Clamp'
@@ -213,11 +214,16 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/syntastic'
 Plug 'ap/vim-css-color'
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
+let g:airline_powerline_fonts = 1
+set guifont=Fira\ Mono\ Medium\ for\ Powerline:h9
+let g:arline_symbols = "fancy"
 let g:clang_user_options='|| exit 0'
-let g:Powerline_symbols = 'simple'
 
 " Sweet pasting idea. use \ key
 nmap \l :setlocal number!<CR>
