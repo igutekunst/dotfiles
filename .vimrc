@@ -217,6 +217,7 @@ Plug 'ap/vim-css-color'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'rust-lang/rust.vim'
 
 call plug#end()
 
@@ -224,6 +225,13 @@ let g:airline_powerline_fonts = 1
 set guifont=Fira\ Mono\ Medium\ for\ Powerline:h9
 let g:arline_symbols = "fancy"
 let g:clang_user_options='|| exit 0'
+
+
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+"
+" " Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Sweet pasting idea. use \ key
 nmap \l :setlocal number!<CR>
@@ -390,3 +398,7 @@ map =j :%!python -m json.tool<CR>
 
 "Gradle
 au BufNewFile,BufRead *.gradle setf groovy
+
+
+" Fugitive vim
+nnoremap <space>gb :Gblame<CR>
