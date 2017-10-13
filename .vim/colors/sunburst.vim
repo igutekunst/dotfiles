@@ -28,11 +28,11 @@ let g:colors_name = "sunburst"
 let t_Co = system("tput colors")
 
 if has("gui_running") || t_Co >= 256
-    hi Normal                       ctermfg=255  ctermbg=None                    guifg=#f8f8f8 guibg=#000000
+    hi Normal                       ctermfg=255  ctermbg=None                  guifg=#e0e0e0 guibg=#131313
     hi Cursor                                    ctermbg=248                                 guibg=#a7a7a7
     hi Visual                                    ctermbg=240                                 guibg=#2c3033
     hi CursorLine                                ctermbg=233                                 guibg=#0d0d0d
-    hi LineNr                       ctermfg=245  ctermbg=None                     guifg=#7c7c7c guibg=#000000
+    hi LineNr                       ctermfg=245  ctermbg=None                  guifg=#7c7c7c guibg=#000000
     hi VertSplit                    ctermfg=246  ctermbg=233  cterm=none       guifg=#949494 guibg=#121212 gui=none
     hi MatchParen                   ctermfg=179  ctermbg=none cterm=none       guifg=#e28964 guibg=#000000 gui=none
     hi StatusLine                   ctermfg=255  ctermbg=236  cterm=none       guifg=#f8f8f8 guibg=#2f2f2f gui=none
@@ -45,10 +45,10 @@ if has("gui_running") || t_Co >= 256
     hi IncSearch                                 ctermbg=240                   guifg=#f8f8f8 guibg=#585858
     hi Search                                    ctermbg=240                   guifg=#f8f8f8 guibg=#585858
     hi Directory                    ctermfg=25                                 guifg=#3387cc
-    hi Folded                       ctermfg=245  ctermbg=None                     guifg=#aeaeae guibg=#000000
-    hi SignColumn                   ctermfg=245  ctermbg=None                     guifg=#aeaeae guibg=#000000
-    hi WarningMsg                   ctermfg=209  ctermbg=None    cterm=none       guifg=#e28964 guibg=#000000 gui=none
-    hi ErrorMsg                     ctermfg=209  ctermbg=None    cterm=none       guifg=#e28964 guibg=#000000 gui=none
+    hi Folded                       ctermfg=245  ctermbg=None                  guifg=#aeaeae guibg=#000000
+    hi SignColumn                   ctermfg=245  ctermbg=None                  guifg=#aeaeae guibg=#000000
+    hi WarningMsg                   ctermfg=209  ctermbg=None    cterm=none    guifg=#e28964 guibg=#000000 gui=none
+    hi ErrorMsg                     ctermfg=209  ctermbg=None    cterm=none    guifg=#e28964 guibg=#000000 gui=none
     hi ModeMsg                                                cterm=none                                   gui=none
 
     hi TabLine                      ctermfg=240  ctermbg=235  cterm=none
