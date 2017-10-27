@@ -85,7 +85,11 @@ if $VIM_CRONTAB == "true"
 set nobackup
 set nowritebackup
 endif
-set t_Co=256
+
+if has("termguicolors")
+set termguicolors
+endif
+
 colorscheme sunburst
 
 " A bunch of things added
@@ -187,7 +191,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'mileszs/ack.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdtree'
-Plug 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/syntastic'
 Plug 'ap/vim-css-color'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
@@ -198,14 +202,34 @@ Plug 'vim-scripts/sessionman.vim'
 Plug 'tpope/vim-rhubarb'
 Plug 'mtth/scratch.vim'
 
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'mbbil/undotree'
+Plug 'vim-scripts/uptime.vim'
+
+
+Plug 'xolox/vim-colorscheme-switcher'
+Plug 'xolox/vim-misc'
+
+" Map :W to :w because fzf has a 
+" :Windows command that keeps getting activated, driving me 
+" up the wall!
+command! W :w
+
+
+nmap <Leader>t :Files<CR>
+nmap <leader>b :Buffers<CR>
+
 set mouse=a
 
 if has('nvim')
-  Plug 'bbchung/Clamp'
+  Plug 'neomake/neomake'
   :tnoremap <Esc> <C-\><C-n>
 endif
 
 call plug#end()
+
+let g:colorscheme_switcher_exclude_builtins = 1
 
 set guifont=Monaco\ for\ Powerline:h11
 set guioptions=
@@ -267,6 +291,8 @@ nmap <leader>l :set list!<CR>
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
 
+nmap ccn :cnext <CR>
+nmap ccp :cprev <CR>
 
 
 nmap gn :tabn<CR>
@@ -297,6 +323,7 @@ map <leader>i V:s/#include[ ]*"\([a-z./]*\)"/#include <\1>/g<CR>
 
 
 command! Todo :execute 'vimgrep /TODO\|FIXME/j'.' '.expand('%') | :copen | :cc
+
 
 if !has('python')
 echo "Error: Required vim compiled with +python"
