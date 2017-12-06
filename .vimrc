@@ -87,10 +87,10 @@ set nowritebackup
 endif
 
 if has("termguicolors")
-set termguicolors
+  "set termguicolors
+  set t_Co=256
 endif
 
-colorscheme sunburst
 
 " A bunch of things added
 " from http://amix.dk/vim/vimrc.html
@@ -153,6 +153,7 @@ map <leader>e :vsp! ~/.vimrc<cr>
 map <leader>; <C-w>> <cr>
 map <leader>E :sp! ~/.vimrc<cr>
 map <leader>c :!ctags -R .<cr>
+map <leader>s :colorscheme solarized<CR>
 
 map <leader>R :redraw!<cr>
 
@@ -186,30 +187,31 @@ set encoding=utf-8
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'gilligan/vim-lldb'
+"Plug 'junegunn/vim-easy-align'
+"Plug 'gilligan/vim-lldb'
+"Plug 'mileszs/ack.vim'
+"
+"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'tpope/vim-fugitive'
-Plug 'mileszs/ack.vim'
-Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdtree'
-"Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/syntastic'
 Plug 'ap/vim-css-color'
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
 Plug 'rust-lang/rust.vim'
-Plug 'vim-scripts/sessionman.vim'
+"Plug 'vim-scripts/sessionman.vim'
 Plug 'tpope/vim-rhubarb'
 Plug 'mtth/scratch.vim'
-
+"
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'mbbil/undotree'
 Plug 'vim-scripts/uptime.vim'
-
-
-Plug 'xolox/vim-colorscheme-switcher'
-Plug 'xolox/vim-misc'
+Plug 'altercation/vim-colors-solarized'
+"
+"
+"Plug 'xolox/vim-colorscheme-switcher'
+"Plug 'xolox/vim-misc'
+"Plug 'altercation/vim-colors-solarized'
 
 " Map :W to :w because fzf has a 
 " :Windows command that keeps getting activated, driving me 
@@ -295,9 +297,12 @@ nmap ccn :cnext <CR>
 nmap ccp :cprev <CR>
 
 
-nmap gn :tabn<CR>
-nmap gp :tabp<CR>
-nmap gt :tabnew<CR>
+"nmap gn :tabn<CR>
+"nmap gp :tabp<CR>
+"nmap gt :tabnew<CR>
+"
+nmap tn :tabn<CR>
+nmap tp :tabp<CR>
 
 " Session Management
 nmap gss :SessionSave <CR>
@@ -400,3 +405,5 @@ augroup END
 "set foldnestmax=10
 "set nofoldenable
 "set foldlevel=2
+"
+colorscheme solarized

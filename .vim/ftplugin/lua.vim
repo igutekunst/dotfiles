@@ -6,7 +6,7 @@ filetype plugin indent on
 
 
 " Execute file being edited with <Shift> + e:
-map <buffer> <S-e> :w<CR>:!/usr/bin/env lua -i % <CR>
+map <buffer> <S-e> :w<CR>:!/usr/bin/env lua% <CR>
 
 setlocal tabstop=2
 setlocal softtabstop=2

@@ -26,7 +26,8 @@ def do_make(makefile_path):
   if status == 0:
       if name:
           print(("Running %s" % name))
-          os.system("./%s" % name)
+          ret = os.system("./%s" % name)
+          print ("({})".format(ret))
           sys.exit(0)
   else:
       print("Make failed")
