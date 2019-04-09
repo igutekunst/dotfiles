@@ -153,7 +153,8 @@ map <leader>e :vsp! ~/.vimrc<cr>
 map <leader>; <C-w>> <cr>
 map <leader>E :sp! ~/.vimrc<cr>
 map <leader>c :!ctags -R .<cr>
-map <leader>s :colorscheme solarized<CR>
+
+map <leader>y :YcmRestartServer <CR>
 
 map <leader>R :redraw!<cr>
 
@@ -195,7 +196,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'Valloric/YouCompleteMe'
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
 Plug 'ap/vim-css-color'
 Plug 'rust-lang/rust.vim'
 "Plug 'vim-scripts/sessionman.vim'
@@ -205,7 +206,7 @@ Plug 'mtth/scratch.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'mbbil/undotree'
-Plug 'vim-scripts/uptime.vim'
+"Plug 'vim-scripts/uptime.vim'
 Plug 'altercation/vim-colors-solarized'
 "
 "
@@ -219,8 +220,6 @@ Plug 'altercation/vim-colors-solarized'
 command! W :w
 
 
-nmap <Leader>t :Files<CR>
-nmap <leader>b :Buffers<CR>
 
 set mouse=a
 
@@ -230,7 +229,6 @@ if has('nvim')
 endif
 
 call plug#end()
-
 let g:colorscheme_switcher_exclude_builtins = 1
 
 set guifont=Monaco\ for\ Powerline:h11
@@ -357,8 +355,6 @@ print directory, filename
 unstaged = getUnstagedFiles()
 if unstaged:
     vim.command(":e %s" % unstaged[0])
-
-
 endpython
 endfunction
 map <leader>gun :call LineNotes(expand('%'))<CR>
@@ -406,4 +402,36 @@ augroup END
 "set nofoldenable
 "set foldlevel=2
 "
-colorscheme solarized
+colorscheme sunburst 
+
+" Ag/ fzf stuff
+
+function! AgStr() 
+python << endpython
+def python_input(message = 'input'):
+  vim.command('call inputsave()')
+  vim.command("let user_input = input('" + message + ": ')")
+  vim.command('call inputrestore()')
+  return vim.eval('user_input')
+if True: # hack to make body indented
+  str_to_find = python_input('string')
+  vim.command(':Ag \\"{}\\"'.format(str_to_find))
+endpython
+endfunction
+
+function! AgSelection(name)
+python << endpython
+
+if True: # hack to make body indented
+  name = vim.eval("a:name")
+  vim.command(":Ag {}".format(name))
+endpython
+endfunction
+
+nmap <leader>a :echom expand('<cword>') <cr>
+nmap <leader>a :call AgSelection(expand('<cword>'))<cr>
+nmap <leader>s :call AgStr()<cr>
+
+nmap <Leader>t :Files<CR>
+nmap <leader>b :Buffers<CR>
+

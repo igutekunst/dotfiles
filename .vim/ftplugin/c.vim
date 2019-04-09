@@ -8,4 +8,3 @@ filetype plugin indent on
 " Execute file being edited with <Shift> + e:
 map <buffer> <S-e> :w<CR>:!/usr/bin/env python ~/.vim/ftplugin/c_helper.py % <CR>
 
-let g:pydiction_location = '~/.vim/vimfiles/pydiction/complete-dict'

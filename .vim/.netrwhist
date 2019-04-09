@@ -1,6 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/home/igutek/rtems/applications/tank-drive/build'
-let g:netrw_dirhist_2='/Volumes/CaseSensitive/projects/shasta/BuildResults'
-let g:netrw_dirhist_3='/Volumes/CaseSensitive/projects/shasta/BuildResults/Skye27Cdiag'
-let g:netrw_dirhist_4='/Volumes/CaseSensitive/projects/shasta/BuildResults/Skye27Cdiag/release'
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/sdks/Yukon/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.0.Internal.sdk/usr/local/include/FactoryProcessShared'
+let g:netrw_dirhist_2='/Volumes/CaseSenitive/projects/b389/TagFW/factoryprocessframework/AutoGeneration/FPCStaticLibraries/B389'
+let g:netrw_dirhist_3='/Volumes/CaseSenitive/projects/shasta/bootloader/Platform/Apple/Common/Library/LibCLite'
