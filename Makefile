@@ -10,7 +10,7 @@ all: link \
 ~/.vim:
 	ln -s `pwd`/.vim/ ~/.vim
 
-link: ~/.vim ~.vimrc
+link: ~/.vim ~/.vimrc
 
 
 .PHONY: history link
