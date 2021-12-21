@@ -5,6 +5,7 @@ endif
 
 noremap <C-n> :bnext<CR>
 noremap <C-p> :bprev<CR>
+colorscheme sunburst 
 
 
 " Use Vim settings
@@ -203,9 +204,8 @@ Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-rhubarb'
 Plug 'mtth/scratch.vim'
 "
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'mbbil/undotree'
 "Plug 'vim-scripts/uptime.vim'
 Plug 'altercation/vim-colors-solarized'
 "
@@ -328,16 +328,11 @@ map <leader>i V:s/#include[ ]*"\([a-z./]*\)"/#include <\1>/g<CR>
 command! Todo :execute 'vimgrep /TODO\|FIXME/j'.' '.expand('%') | :copen | :cc
 
 
-if !has('python')
-echo "Error: Required vim compiled with +python"
-    finish
-endif
-
-python << endpython
+python3 << endpython
 import vim, os, subprocess
 
 def getUnstagedFiles():
-    print "---------------------------------------------"
+    print ("---------------------------------------------")
     output = subprocess.check_output('git ls-files -m'.split())
     output = output.splitlines()
     return output
@@ -402,7 +397,6 @@ augroup END
 "set nofoldenable
 "set foldlevel=2
 "
-colorscheme sunburst 
 
 " Ag/ fzf stuff
 
@@ -432,6 +426,6 @@ nmap <leader>a :echom expand('<cword>') <cr>
 nmap <leader>a :call AgSelection(expand('<cword>'))<cr>
 nmap <leader>s :call AgStr()<cr>
 
-nmap <Leader>t :Files<CR>
+nmap <Leader>t :GFiles<CR>
 nmap <leader>b :Buffers<CR>
 
