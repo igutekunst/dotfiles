@@ -189,11 +189,7 @@ set encoding=utf-8
 
 call plug#begin('~/.vim/plugged')
 
-"Plug 'junegunn/vim-easy-align'
-"Plug 'gilligan/vim-lldb'
-"Plug 'mileszs/ack.vim'
-"
-"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plug 'dense-analysis/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'Valloric/YouCompleteMe'
@@ -208,11 +204,12 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 "Plug 'vim-scripts/uptime.vim'
 Plug 'altercation/vim-colors-solarized'
-"
-"
-"Plug 'xolox/vim-colorscheme-switcher'
-"Plug 'xolox/vim-misc'
-"Plug 'altercation/vim-colors-solarized'
+Plug 'ollykel/v-vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'vim-autoformat/vim-autoformat'
+
+call plug#end()
 
 " Map :W to :w because fzf has a 
 " :Windows command that keeps getting activated, driving me 
@@ -228,10 +225,8 @@ if has('nvim')
   :tnoremap <Esc> <C-\><C-n>
 endif
 
-call plug#end()
 let g:colorscheme_switcher_exclude_builtins = 1
 
-set guifont=Monaco\ for\ Powerline:h11
 set guioptions=
 
 let g:arline_symbols = "fancy"
@@ -428,4 +423,6 @@ nmap <leader>s :call AgStr()<cr>
 
 nmap <Leader>t :GFiles<CR>
 nmap <leader>b :Buffers<CR>
+noremap <F4> :Autoformat<CR>
+
 

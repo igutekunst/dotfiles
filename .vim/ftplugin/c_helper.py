@@ -60,7 +60,7 @@ compilers_by_extension = {'.cpp'   : 'g++',
                           '.cc'    : 'g++', 
                           '.c'     : 'gcc'}
 
-flags_by_compiler = {'g++' : '--std=c++11',
+flags_by_compiler = {'g++' : '--std=c++20',
                      'gcc' : '--std=c99'}
 
 if extension in compilers_by_extension:

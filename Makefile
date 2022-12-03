@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 LOCAL:= ~/local
 RC:=$(HOME)/.bashrc.d/
 
@@ -14,6 +16,13 @@ link: ~/.vim ~/.vimrc
 
 
 .PHONY: history link
+
+venv:
+	python3 -m venv venv
+
+ansible: venv
+	source venv/bin/activate &&  pip install ansible keyring
+
 
 ~/local:
 	mkdir ~/local
