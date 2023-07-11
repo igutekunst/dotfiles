@@ -1,1 +1,1 @@
-/Users/igutek/dotfiles/.vimrc
+/Users/igutek/.vimrc

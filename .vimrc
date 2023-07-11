@@ -189,13 +189,16 @@ set encoding=utf-8
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'elixir-editors/vim-elixir'
 Plug 'dense-analysis/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
+
 Plug 'Valloric/YouCompleteMe'
 "Plug 'scrooloose/syntastic'
 Plug 'ap/vim-css-color'
 Plug 'rust-lang/rust.vim'
+Plug 'dense-analysis/ale'
 "Plug 'vim-scripts/sessionman.vim'
 Plug 'tpope/vim-rhubarb'
 Plug 'mtth/scratch.vim'
@@ -323,16 +326,6 @@ map <leader>i V:s/#include[ ]*"\([a-z./]*\)"/#include <\1>/g<CR>
 command! Todo :execute 'vimgrep /TODO\|FIXME/j'.' '.expand('%') | :copen | :cc
 
 
-python3 << endpython
-import vim, os, subprocess
-
-def getUnstagedFiles():
-    print ("---------------------------------------------")
-    output = subprocess.check_output('git ls-files -m'.split())
-    output = output.splitlines()
-    return output
-
-endpython
 
 function! LineNotes(name)
 
@@ -425,4 +418,19 @@ nmap <Leader>t :GFiles<CR>
 nmap <leader>b :Buffers<CR>
 noremap <F4> :Autoformat<CR>
 
+
+let g:python3_host_prog = '/Users/igutek/dotfiles/.vim/neovim/venv/bin/python'
+
+let g:ale_linters = { 'elixir': ['elixir-ls'], }
+
+
+" Required, tell ALE where to find Elixir LS
+let g:ale_elixir_elixir_ls_release = expand("/Users/igutek/Downloads/elixir-ls/rel/")
+
+" Optional, you can disable Dialyzer with this setting
+let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:false}}
+
+" Optional, configure as-you-type completions
+set completeopt=menu,menuone,preview,noselect,noinsert
+let g:ale_completion_enabled = 1
 
