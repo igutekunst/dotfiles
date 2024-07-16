@@ -1,2 +1,4 @@
 !.vimrc
 .vim/plugged
+venv
+.venv

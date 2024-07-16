@@ -1,0 +1,31 @@
+---
+- name: Allow release-info to change for APT repositories
+  command: apt-get update -y --allow-releaseinfo-change
+- name: Update package cache
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: Upgrade all packages to the latest version
+  apt:
+    name: "*"
+    state: latest
+
+- name: Install main packages
+  become: yes
+  apt:
+    name: 
+      - ssh 
+      - bzip2
+      - rsync 
+      - curl 
+      - jq
+      - inetutils-ping
+      - smbclient
+      - php-smbclient
+      - coreutils 
+      - php-ldap 
+    state: latest
+    update_cache: yes
+
+
