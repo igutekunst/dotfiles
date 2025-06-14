@@ -435,3 +435,7 @@ let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:false}}
 set completeopt=menu,menuone,preview,noselect,noinsert
 let g:ale_completion_enabled = 1
 
+
+" Key mapping (optional)
+nnoremap <leader>gp :GenSecurePassword<CR>
+
