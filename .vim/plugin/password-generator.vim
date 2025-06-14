@@ -33,7 +33,7 @@ endfunction
 
 function! ReplacePasswordOnLine()
     let l:current_line = getline('.')
-    let l:new_password = GenerateSecurePassword(24)
+    let l:new_password = GenerateSecurePassword(64)
     
     " Exit if password generation failed
     if l:new_password == ""
